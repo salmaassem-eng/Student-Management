@@ -1,0 +1,54 @@
+<div class="overflow-x-auto rounded-xl shadow">
+  <table class="min-w-full bg-white text-sm">
+    <thead class="bg-blue-600 text-white">
+      <tr>
+        <th class="px-4 py-3 text-left">ID</th>
+        <th class="px-4 py-3 text-left">Name</th>
+        <th class="px-4 py-3 text-left">Age</th>
+        <th class="px-4 py-3 text-left">Department</th>
+        <th class="px-4 py-3 text-left">GPA</th>
+        <th class="px-4 py-3 text-left">Status</th>
+        <th class="px-4 py-3 text-left">View / Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- *ngFor loops over every student in the filtered list -->
+      <tr *ngFor="let student of filteredStudents" class="border-b hover:bg-blue-50 transition-colors">
+
+        <td class="px-4 py-3 text-gray-500">{{ student.id }}</td>
+
+        <td class="px-4 py-3 font-medium text-gray-800">
+          {{ student.firstName }} {{ student.lastName }}
+        </td>
+
+        <td class="px-4 py-3 text-gray-600">{{ student.age }}</td>
+
+        <td class="px-4 py-3 text-gray-600">{{ student.department }}</td>
+
+        <td class="px-4 py-3 font-semibold">
+          <span *ngIf="student.GPA >= 3.5" class="text-green-600">{{ student.GPA }}</span>
+          <span *ngIf="student.GPA >= 2.5 && student.GPA < 3.5"  class="text-yellow-600">{{ student.GPA }}</span>
+          <span *ngIf="student.GPA < 2.5"  class="text-red-500">{{ student.GPA }}</span>
+        </td>
+
+        <td class="px-4 py-3">
+          <span *ngIf="student.isActive"  class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full font-semibold">Active</span>
+          <span *ngIf="!student.isActive" class="bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full font-semibold">Inactive</span>
+        </td>
+
+        <td class="px-4 py-3">
+          <div class="flex gap-2">
+            <!-- (click) = event binding -->
+            <button (click)="viewStudent(student.id)"  class="bg-white text-white px-3 py-1 rounded-lg text-xs hover:bg-blue-600 transition">👁 </button>
+            <button (click)="onDelete(student.id)"     class="bg-white text-white px-3 py-1 rounded-lg text-xs hover:bg-gray-600 transition">🗑 </button>
+          </div>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="filteredStudents.length === 0" class="text-center text-gray-400 py-8">
+    No students match your search.
+  </div>
+</div>

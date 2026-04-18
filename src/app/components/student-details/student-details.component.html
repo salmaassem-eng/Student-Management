@@ -1,0 +1,83 @@
+<div class="max-w-3xl mx-auto px-4 py-8">
+
+  <button (click)="goBack()" class="mb-6 flex items-center gap-2 text-blue-600 hover:text-blue-800 transition font-medium">
+    ← Back to Students
+  </button>
+
+  <!-- *ngIf: show "not found" when student is undefined -->
+  <div *ngIf="!student" class="text-center py-16 text-gray-400">
+    <p class="text-5xl mb-4">🔍</p>
+    <p class="text-xl">Student not found.</p>
+  </div>
+
+  <!-- *ngIf: show card only when student exists -->
+  <div *ngIf="student" class="bg-white rounded-2xl shadow-md overflow-hidden">
+
+    <!-- Header -->
+    <div class="bg-blue-600 text-white px-6 py-5 flex items-center gap-4">
+      <div class="bg-white text-blue-600 rounded-full w-14 h-14 flex items-center justify-center text-2xl font-bold">
+        {{ student.firstName.charAt(0) }}
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold">{{ student.firstName }} {{ student.lastName }}</h2>
+        <p class="text-blue-200 text-sm">#{{ student.id }} / {{ student.department }}</p>
+      </div>
+      <span *ngIf="student.isActive"  class="ml-auto bg-green-400 text-white text-xs px-3 py-1 rounded-full font-semibold">Active</span>
+      <span *ngIf="!student.isActive" class="ml-auto bg-red-400   text-white text-xs px-3 py-1 rounded-full font-semibold">Inactive</span>
+    </div>
+
+    <!-- Info grid -->
+    <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+      <div class="bg-gray-50 rounded-xl p-4">
+        <p class="text-xs text-gray-400 uppercase mb-1">Age</p>
+        <p class="font-semibold text-gray-700">{{ student.age }} years old</p>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-4">
+        <p class="text-xs text-gray-400 uppercase mb-1">Gender</p>
+        <p class="font-semibold text-gray-700">{{ student.gender }}</p>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-4">
+        <p class="text-xs text-gray-400 uppercase mb-1">Email</p>
+        <p class="font-semibold text-gray-700">{{ student.email }}</p>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-4">
+        <p class="text-xs text-gray-400 uppercase mb-1">Phone</p>
+        <p class="font-semibold text-gray-700">{{ student.phone }}</p>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-4">
+        <p class="text-xs text-gray-400 uppercase mb-1">Address</p>
+        <p class="font-semibold text-gray-700">{{ student.address }}, {{ student.city }}, {{ student.country }}</p>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-4">
+        <p class="text-xs text-gray-400 uppercase mb-1">Department</p>
+        <p class="font-semibold text-gray-700">{{ student.department }}</p>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-4">
+        <p class="text-xs text-gray-400 uppercase mb-1">Level (Year)</p>
+        <p class="font-semibold text-gray-700">Year {{ student.level }}</p>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-4">
+        <p class="text-xs text-gray-400 uppercase mb-1">GPA</p>
+        <p class="font-bold text-lg">
+          <span *ngIf="student.GPA >= 3.5"                         class="text-green-600">{{ student.GPA }}</span>
+          <span *ngIf="student.GPA >= 2.5 && student.GPA < 3.5"   class="text-yellow-600">{{ student.GPA }}</span>
+          <span *ngIf="student.GPA < 2.5"                          class="text-red-500">{{ student.GPA }}</span>
+        </p>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-4">
+        <p class="text-xs text-gray-400 uppercase mb-1">Enrollment Date</p>
+        <p class="font-semibold text-gray-700">{{ student.enrollmentDate }}</p>
+      </div>
+
+    </div>
+  </div>
+</div>

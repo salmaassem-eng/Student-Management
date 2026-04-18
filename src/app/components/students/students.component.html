@@ -1,0 +1,30 @@
+<div class="max-w-6xl mx-auto px-4 py-8">
+
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-3">
+    <h2 class="text-2xl font-bold text-gray-800">📋 All Students</h2>
+    <!-- Search input — bonus feature -->
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      placeholder="Search by name..."
+      class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full sm:w-64"
+    />
+  </div>
+
+  <!-- async pipe subscribes to the Observable automatically -->
+  <ng-container *ngIf="students$ | async as students">
+
+    <div *ngIf="students.length === 0" class="text-center text-gray-400 py-12 text-lg">
+      No students yet. <a routerLink="/add-student" class="text-blue-500 underline">Add one!</a>
+    </div>
+
+    <!-- Pass data DOWN to child with @Input, listen to events UP via @Output -->
+    <app-student-table
+      *ngIf="students.length > 0"
+      [students]="students"
+      [searchText]="searchText"
+      (deleteStudent)="onDeleteStudent($event)">
+    </app-student-table>
+
+  </ng-container>
+</div>

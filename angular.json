@@ -3,9 +3,34 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Student-Management": {
+    "student-management": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:component": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -60,10 +85,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Student-Management:build:production"
+              "browserTarget": "student-management:build:production"
             },
             "development": {
-              "browserTarget": "Student-Management:build:development"
+              "browserTarget": "student-management:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +96,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Student-Management:build"
+            "browserTarget": "student-management:build"
           }
         },
         "test": {
@@ -94,5 +119,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "4ca92769-82ff-4444-b0b1-f8c94891b913"
   }
 }
