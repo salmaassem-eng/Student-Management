@@ -18,7 +18,6 @@ export class StudentDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Read :id from the URL e.g. /student/3
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.student = this.studentsService.getStudentById(id);
   }

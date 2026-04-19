@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentsService } from '../../services/students.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-add-student',
@@ -9,7 +11,6 @@ import { StudentsService } from '../../services/students.service';
 })
 export class AddStudentComponent {
 
-  // All form fields stored here — bound with [(ngModel)]
   student = {
     firstName: '',
     lastName: '',
@@ -29,13 +30,16 @@ export class AddStudentComponent {
 
   successMessage: string = '';
 
-  constructor(private studentsService: StudentsService, private router: Router) {}
-
+  constructor(private studentsService: StudentsService, private router: Router ,private toastr: ToastrService) {}
   onSubmit(): void {
-    if (!this.student.firstName || !this.student.lastName || !this.student.email || !this.student.department || !this.student.GPA) {
-      alert('Please fill in all required fields.');
+    if (!this.student.firstName || !this.student.lastName || !this.student.email) {
+      this.toastr.warning(
+        'Please fill in all required fields.',
+        '⚠️ Missing Fields'
+      );
       return;
     }
+
 
     this.studentsService.addStudent({
       firstName:      this.student.firstName,
@@ -54,7 +58,11 @@ export class AddStudentComponent {
       isActive:       this.student.isActive
     });
 
-    this.successMessage = '✅ Student added successfully!';
-    setTimeout(() => this.router.navigate(['/students']), 1500);
+   this.toastr.success(
+      `${this.student.firstName} ${this.student.lastName} was added successfully!`,
+      '✅ Student Added'
+    );
+
+    setTimeout(() => this.router.navigate(['/students']), 1800);
   }
 }

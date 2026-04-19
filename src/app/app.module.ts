@@ -10,6 +10,8 @@ import { StudentsComponent } from './components/students/students.component';
 import { StudentTableComponent } from './components/student-table/student-table.component';
 import { AddStudentComponent } from './components/add-student/add-student.component';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,14 @@ import { StudentDetailsComponent } from './components/student-details/student-de
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      timeOut: 3000,
+      progressBar: true,
+      closeButton: true,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

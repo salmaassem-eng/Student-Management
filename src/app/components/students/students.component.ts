@@ -18,7 +18,6 @@ export class StudentsComponent implements OnInit {
     this.students$ = this.studentsService.students$;
   }
 
-  // Called when child emits deleteStudent event via @Output
   onDeleteStudent(id: number): void {
     this.studentsService.deleteStudent(id);
   }

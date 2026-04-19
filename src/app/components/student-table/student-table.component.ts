@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Student } from '../../services/students.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-student-table',
@@ -9,19 +11,17 @@ import { Student } from '../../services/students.service';
 })
 export class StudentTableComponent {
 
-  // @Input: receives students list from parent (StudentsComponent)
+  //receive data from search and view student  ==> name
   @Input() students: Student[] = [];
-
-  // @Input: receives search text from parent
   @Input() searchText: string = '';
-
-  // @Output: sends the id to delete back up to parent
   @Output() deleteStudent = new EventEmitter<number>();
 
-  constructor(private router: Router) {}
+  pendingDeleteId: number | null = null;
+  constructor(private router: Router, private toastr: ToastrService) {}
 
-  // Filter by first or last name matching the search text
-  get filteredStudents(): Student[] {
+
+
+  get filteredStudents(): Student[] {                                 //relate to search
     if (!this.searchText.trim()) return this.students;
     const q = this.searchText.toLowerCase();
     return this.students.filter(s =>
@@ -34,9 +34,21 @@ export class StudentTableComponent {
     this.router.navigate(['/student', id]);
   }
 
-  onDelete(id: number): void {
-    if (confirm('Are you sure you want to delete this student?')) {
-      this.deleteStudent.emit(id);
-    }
+   onDelete(id: number): void {
+    this.pendingDeleteId = id;
+  }
+
+  confirmDelete(student: Student): void {
+    this.deleteStudent.emit(student.id);
+    this.pendingDeleteId = null;
+    this.toastr.error(
+      `${student.firstName} ${student.lastName} has been removed.`,
+      '🗑 Student Deleted'
+    );
+  }
+
+  cancelDelete(): void {
+    this.pendingDeleteId = null;
+    this.toastr.info('Delete cancelled.', 'Cancelled');
   }
 }
