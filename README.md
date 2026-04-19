@@ -1,27 +1,89 @@
-# StudentManagement
+# 🎓 Student Management System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+A fully functional Student Management System built with **Angular 16** and **Tailwind CSS** as part of an ITI training project.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🚀 Getting Started
 
-## Code scaffolding
+### Prerequisites
+- Node.js (v18 recommended)
+- Angular CLI v16
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+npm install -g @angular/cli@16
+```
 
-## Build
+### Installation & Run
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+# 1. Install dependencies
+npm install
 
-## Running unit tests
+# 2. Start the development server
+ng serve
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# 3. Open your browser at
+http://localhost:4200
+```
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+## 📄 Pages & Routing
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+| Route | Component | Description |
+|---|---|---|
+| `/home` | HomeComponent | Welcome page with quick navigation |
+| `/students` | StudentsComponent | Table of all students with search |
+| `/add-student` | AddStudentComponent | Form to add a new student |
+| `/student/:id` | StudentDetailsComponent | Full info about one student |
+
+---
+
+## ✨ Features
+
+- 📋 **View all students** in a clean, responsive table
+- ➕ **Add new students** with a full form
+- 🗑 **Delete students** with an inline confirmation row (no browser popups)
+- 👁 **View student details** on a dedicated page
+- 🔍 **Search students** by first or last name in real-time
+- 🟢 **GPA color coding** — Green / Yellow / Red based on score
+- 🔔 **Toast notifications** using `ngx-toastr` for all actions
+- 📱 **Responsive design** with Tailwind CSS
+
+---
+
+## 🧠 Angular Concepts Used
+
+| Concept | Where |
+|---|---|
+| `Interpolation {{ }}` | All templates |
+| `Property Binding [ ]` | `[students]`, `[searchText]` passed to child |
+| `Event Binding ( )` | `(click)`, `(ngSubmit)` |
+| `Two-way Binding [(ngModel)]` | Add student form fields |
+| `*ngFor` | Rendering table rows |
+| `*ngIf` | Conditional badges, GPA colors, confirm row |
+| `@Input` | `StudentTableComponent` receives data from parent |
+| `@Output + EventEmitter` | `StudentTableComponent` emits delete event to parent |
+| `BehaviorSubject` | `StudentsService` — holds and updates student list |
+| `Observable` | Exposed from service for components to subscribe |
+| `async pipe` | `students$ \| async` in students template |
+| `Angular Routing` | 4 routes including dynamic `/student/:id` |
+| `ActivatedRoute` | Reading `:id` param in StudentDetailsComponent |
+| `Services` | `StudentsService` shared across all components |
+
+---
+
+## 📦 Dependencies
+
+| Package | Version | Purpose |
+|---|---|---|
+| `@angular/core` | 16.x | Angular framework |
+| `tailwindcss` | 3.x | Utility-first CSS styling |
+| `ngx-toastr` | 15.x | Toast notifications |
+| `@angular/animations` | 16.x | Required for toastr animations 
+## 👨‍💻 Author
+
+Built as a training project at **ITI (Information Technology Institute)**  
+Demonstrating core Angular concepts: components, routing, services, observables, and component communication.
